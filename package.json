@@ -1,0 +1,25 @@
+{
+  "author": "Edgar Arguelles",
+  "name": "nodejs_sequelize",
+  "version": "1.0.0",
+  "description": "Nodejs REST Server using restify, MySQL and Sequelize",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EdgarArguelles/nodejs_sequelize"
+  },
+  "bugs": {
+    "url": "https://github.com/EdgarArguelles/nodejs_sequelize/issues"
+  },
+  "readmeFilename": "README.md",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  },
+  "dependencies": {
+    "mysql": "^2.7.0",
+    "restify": "^3.0.3",
+    "sequelize": "^3.2.0"
+  },
+  "devDependencies": {}
+}
