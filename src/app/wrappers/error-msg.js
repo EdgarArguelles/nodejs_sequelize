@@ -15,16 +15,16 @@ module.exports = {
         wrapper.devMessage = devMessage;
         return wrapper;
     },
-    fromErrors: function (errors) {
+    fromErrors: function (err) {
         wrapper.message = null;
         wrapper.messages = [];
-        wrapper.devMessage = JSON.stringify(errors);
-        for (var attributename in errors) {
-            var error = errors[attributename],
+        wrapper.devMessage = err;
+        for (var attributename in err.errors) {
+            var error = err.errors[attributename],
                 msg = null,
                 field = error.path;
-            switch (error.kind) {
-                case "required" :
+            switch (error.type) {
+                case "notNull Violation" :
                     msg = "The field [" + field + "] is required.";
                     break;
                 case "ObjectID" :

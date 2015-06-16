@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
     var schema = {
-        name: {type: DataTypes.STRING(20), primaryKey: true},
+        name: {type: DataTypes.STRING(20), primaryKey: true, allowNull: false},
         description: {type: DataTypes.STRING, allowNull: false}
     };
 

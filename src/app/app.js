@@ -41,4 +41,4 @@ server.db = new sequelize('mysql://root:root@localhost:3306/sequelize', {
 require('./init-db')(server);
 
 /* ===================== Routes ======================= */
-//require('./routes/index')(base_path, server);
+require('./routes/index')(base_path, server);

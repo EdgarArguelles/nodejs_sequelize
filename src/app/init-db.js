@@ -5,5 +5,5 @@ module.exports = function (server) {
     server.db.import(path + "role");
     server.db.import(path + "permission");
 
-    server.db.sync({force: true});
+    server.db.sync({force: false});
 };
