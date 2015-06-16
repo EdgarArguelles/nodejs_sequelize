@@ -1,9 +1,12 @@
 module.exports = function (sequelize, DataTypes) {
     var schema = {
         firstName: {type: DataTypes.STRING(10), field: "first_name", allowNull: false, comment: "Field comment!"},
-        lastName: {type: DataTypes.STRING, field: "last_name", validate: {len: [2, 6]}},
+        lastName: {type: DataTypes.STRING, field: "last_name"},
         phone: DataTypes.STRING,
-        age: {type: DataTypes.INTEGER, validate: {max: 23, isInt: {msg: "Must be an integer"}}},
+        age: {
+            type: DataTypes.INTEGER,
+            validate: {max: {args: 23, msg: "should be 23 as maximum"}, isInt: {msg: "must be an integer"}}
+        },
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

@@ -27,27 +27,11 @@ module.exports = {
                 case "notNull Violation" :
                     msg = "The field [" + field + "] is required.";
                     break;
-                case "ObjectID" :
-                    msg = "The field [" + field + "] should be an id value.";
+                case "unique violation" :
+                    msg = "There is another entry with the same value that field [" + field + "].";
                     break;
-                case "Number" :
-                    msg = "The field [" + field + "] should be a numeric.";
-                    break;
-                case "min" :
-                    var min = error.message.substring(error.message.lastIndexOf("(") + 1, error.message.lastIndexOf(")"));
-                    msg = "The minimum allowed value for the field [" + field + "] is " + min + ".";
-                    break;
-                case "max" :
-                    var max = error.message.substring(error.message.lastIndexOf("(") + 1, error.message.lastIndexOf(")"));
-                    msg = "The maximum allowed value for the field [" + field + "] is " + max + ".";
-                    break;
-                case "minlength" :
-                    var min = error.message.substring(error.message.lastIndexOf("(") + 1, error.message.lastIndexOf(")"));
-                    msg = "The minimum length for the field [" + field + "] is " + min + ".";
-                    break;
-                case "maxlength" :
-                    var max = error.message.substring(error.message.lastIndexOf("(") + 1, error.message.lastIndexOf(")"));
-                    msg = "The maximum length for the field [" + field + "] is " + max + ".";
+                case "Validation error" :
+                    msg = "The field [" + field + "] " + error.message + ".";
                     break;
                 default :
                     msg = error.message;

@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING(20),
             allowNull: false,
             unique: true,
-            validate: {len: {args: [5, 10], msg: "It should be between 5 and 10 chars"}}
+            validate: {len: {args: [5, 20], msg: "should be between 5 and 20 chars"}}
         },
         password: {type: DataTypes.STRING, allowNull: false}
     };
