@@ -1,4 +1,6 @@
 var wrapper = {
+    ID: "12sd##$%$$&1312f1",
+    errorCode: 0,
     message: "",
     messages: [],
     devMessage: ""
@@ -9,13 +11,18 @@ module.exports = {
     UNAUTHORIZED: 401,
     NOT_FOUND: 404,
     INTERNAL_SERVER_ERROR: 500,
-    get: function (message, devMessage) {
+    isError: function (obj) {
+        return obj.ID && obj.ID === wrapper.ID;
+    },
+    get: function (message, devMessage, errorCode) {
+        wrapper.errorCode = errorCode;
         wrapper.message = message;
         wrapper.messages = [message];
         wrapper.devMessage = devMessage;
         return wrapper;
     },
-    fromErrors: function (err) {
+    fromErrors: function (err, errorCode) {
+        wrapper.errorCode = errorCode;
         wrapper.message = null;
         wrapper.messages = [];
         wrapper.devMessage = err;

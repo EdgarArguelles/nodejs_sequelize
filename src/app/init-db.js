@@ -1,9 +1,9 @@
-module.exports = function (server) {
+module.exports = function () {
     var path = __base + "/models/";
-    server.db.import(path + "personal");
-    server.db.import(path + "user");
-    server.db.import(path + "role");
-    server.db.import(path + "permission");
+    __sequelize.import(path + "personal");
+    __sequelize.import(path + "user");
+    __sequelize.import(path + "role");
+    __sequelize.import(path + "permission");
 
-    server.db.sync({force: false});
+    __sequelize.sync({force: false});
 };

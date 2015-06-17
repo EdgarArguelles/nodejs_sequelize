@@ -1,3 +1,5 @@
+var messages = require(__base + "/utils/messages");
+
 module.exports = function (sequelize, DataTypes) {
     var schema = {
         firstName: {type: DataTypes.STRING(10), field: "first_name", allowNull: false, comment: "Field comment!"},
@@ -5,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
         phone: DataTypes.STRING,
         age: {
             type: DataTypes.INTEGER,
-            validate: {max: {args: 23, msg: "should be 23 as maximum"}, isInt: {msg: "must be an integer"}}
+            validate: {max: {args: 23, msg: messages.ERROR_MAX(23)}, isInt: {msg: messages.ERROR_INTEGER}}
         },
         user_id: {
             type: DataTypes.INTEGER,

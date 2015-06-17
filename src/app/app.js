@@ -21,7 +21,7 @@ server.listen(3000, function () {
 });
 
 /* ===================== DataBase ======================= */
-server.db = new sequelize('mysql://root:root@localhost:3306/sequelize', {
+global.__sequelize = new sequelize('mysql://root:root@localhost:3306/sequelize', {
     //logging: false,
     //global configurations for all the tables (could be overwrite by each table)
     define: {
@@ -38,7 +38,7 @@ server.db = new sequelize('mysql://root:root@localhost:3306/sequelize', {
 });
 
 /* ===================== Init Data Base ======================= */
-require('./init-db')(server);
+require('./init-db')();
 
 /* ===================== Routes ======================= */
-require('./routes/index')(base_path, server);
+require('./controllers/index')(base_path, server);

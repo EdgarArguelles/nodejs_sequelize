@@ -1,4 +1,5 @@
-var crypto = require('crypto');
+var messages = require(__base + "/utils/messages"),
+    crypto = require('crypto');
 
 module.exports = function (sequelize, DataTypes) {
     var schema = {
@@ -6,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING(20),
             allowNull: false,
             unique: true,
-            validate: {len: {args: [5, 20], msg: "should be between 5 and 20 chars"}}
+            validate: {len: {args: [5, 20], msg: messages.ERROR_LEN(5, 20)}}
         },
         password: {type: DataTypes.STRING, allowNull: false}
     };
