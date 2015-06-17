@@ -3,16 +3,17 @@ var Error = require(__base + '/wrappers/error-msg'),
 
 //privates section
 var saveupdate = function (newpermission) {
-    return newpermission.save()
-        .then(function (permission) {
-            return permission;
-        })
-        .catch(function (err) {
-            if (err.errors) {
-                return Error.fromErrors(err, Error.BAD_REQUEST);
-            }
-            return Error.get("There was an error", err, Error.INTERNAL_SERVER_ERROR);
-        });
+    return __sequelize.transaction(function (t) {
+        return newpermission.save()
+            .then(function (permission) {
+                return permission;
+            });
+    }).then(function (permission) {
+        return permission;
+    }).catch(function (err) {
+        if (err.errors) return Error.fromErrors(err, Error.BAD_REQUEST);
+        return Error.get("There was an error", err, Error.INTERNAL_SERVER_ERROR);
+    });
 };
 
 module.exports = {
@@ -29,9 +30,7 @@ module.exports = {
     findById: function (id) {
         return Permission.findById(id)
             .then(function (permission) {
-                if (!permission) {
-                    return Error.get("No data available", "", Error.NOT_FOUND);
-                }
+                if (!permission) return Error.get("No data available", "", Error.NOT_FOUND);
                 return permission;
             })
             .catch(function (err) {

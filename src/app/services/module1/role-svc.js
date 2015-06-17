@@ -5,16 +5,14 @@ var Error = require(__base + '/wrappers/error-msg'),
 //privates section
 var saveupdate = function (newrole) {
     return __sequelize.transaction(function (t) {
-        return newrole.save({transaction: t})
+        return newrole.save()
             .then(function (role) {
                 return role;
             });
     }).then(function (role) {
         return role;
     }).catch(function (err) {
-        if (err.errors) {
-            return Error.fromErrors(err, Error.BAD_REQUEST);
-        }
+        if (err.errors) return Error.fromErrors(err, Error.BAD_REQUEST);
         return Error.get("There was an error", err, Error.INTERNAL_SERVER_ERROR);
     });
 };
@@ -33,9 +31,7 @@ module.exports = {
     findById: function (id) {
         return Role.findById(id, {include: [Permission]})
             .then(function (role) {
-                if (!role) {
-                    return Error.get("No data available", "", Error.NOT_FOUND);
-                }
+                if (!role) return Error.get("No data available", "", Error.NOT_FOUND);
                 return role;
             })
             .catch(function (err) {

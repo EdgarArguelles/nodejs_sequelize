@@ -17,6 +17,7 @@
     "npm": "1.4.x"
   },
   "dependencies": {
+    "continuation-local-storage": "^3.1.4",
     "mysql": "^2.7.0",
     "restify": "^3.0.3",
     "sequelize": "^3.2.0"
