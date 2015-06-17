@@ -1,4 +1,5 @@
 var restify = require('restify'),
+    cls = require('continuation-local-storage'),
     sequelize = require('sequelize');
 
 /* ===================== Set Global Constant ======================= */
@@ -21,6 +22,8 @@ server.listen(3000, function () {
 });
 
 /* ===================== DataBase ======================= */
+//Avoid sending {transaction: t} on each save, create, etc
+sequelize.cls = cls.createNamespace('my-sequelize');
 global.__sequelize = new sequelize('mysql://root:root@localhost:3306/sequelize', {
     //logging: false,
     //global configurations for all the tables (could be overwrite by each table)
