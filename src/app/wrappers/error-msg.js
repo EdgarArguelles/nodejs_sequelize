@@ -12,20 +12,20 @@ module.exports = {
     NOT_FOUND: 404,
     INTERNAL_SERVER_ERROR: 500,
     isError: function (obj) {
-        return obj.ID && obj.ID === wrapper.ID;
+        return obj && obj.ID && obj.ID === wrapper.ID;
     },
     get: function (message, devMessage, errorCode) {
         wrapper.errorCode = errorCode;
         wrapper.message = message;
         wrapper.messages = [message];
-        wrapper.devMessage = devMessage;
+        wrapper.devMessage = devMessage && devMessage.message ? devMessage.message : devMessage;
         return wrapper;
     },
     fromErrors: function (err, errorCode) {
         wrapper.errorCode = errorCode;
         wrapper.message = null;
         wrapper.messages = [];
-        wrapper.devMessage = err;
+        wrapper.devMessage = err && err.message ? err.message : err;
         for (var attributename in err.errors) {
             var error = err.errors[attributename],
                 msg = null,
