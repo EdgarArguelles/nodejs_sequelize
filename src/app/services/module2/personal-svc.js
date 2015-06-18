@@ -1,6 +1,5 @@
 var Error = require(__base + '/wrappers/error-msg'),
-    Personal = __sequelize.import(__base + "/models/personal"),
-    User = __sequelize.import(__base + "/models/user");
+    Personal = __sequelize.import(__base + "/models/personal");
 
 //privates section
 var saveupdate = function (newpersonal) {
@@ -20,7 +19,7 @@ var saveupdate = function (newpersonal) {
 module.exports = {
     //public section
     findAll: function () {
-        return Personal.findAll()
+        return Personal.findAll({include: [{all: true}]})
             .then(function (personals) {
                 return personals;
             })
@@ -29,7 +28,7 @@ module.exports = {
             });
     },
     findById: function (id) {
-        return Personal.findById(id)
+        return Personal.findById(id, {include: [{all: true, nested: true}]})
             .then(function (personal) {
                 if (!personal) return Error.get("No data available", "", Error.NOT_FOUND);
                 console.log(Personal.getTableName());

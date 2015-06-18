@@ -12,11 +12,7 @@ module.exports = function (sequelize, DataTypes) {
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            unique: true,
-            references: {
-                model: sequelize.import(__base + "/models/user"),
-                key: 'id'
-            }
+            unique: true
         }
     };
 
@@ -34,6 +30,12 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: true,
         //tableName: 'custom_name',
         comment: "Table comment!"
+    });
+
+    //create many to many relationship
+    Personal.belongsTo(sequelize.import(__base + "/models/user"), {
+        onDelete: 'RESTRICT',
+        onUpdate: 'RESTRICT'
     });
 
     return Personal;
