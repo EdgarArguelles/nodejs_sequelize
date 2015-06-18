@@ -8,7 +8,5 @@ module.exports = {
     ERROR_MIN: function (min) {
         return "should be " + min + " as minimum";
     },
-    ERROR_INTEGER: function () {
-        return "must be an integer";
-    }
+    ERROR_INTEGER: "must be an integer"
 };

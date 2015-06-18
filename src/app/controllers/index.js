@@ -5,4 +5,5 @@ module.exports = function (base, server) {
 
     // module2
     require('./module2/user-ctrl')(base + '/users', server);
+    require('./module2/personal-ctrl')(base + '/personals', server);
 };
