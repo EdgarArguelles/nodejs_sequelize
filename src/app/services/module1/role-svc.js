@@ -3,10 +3,16 @@ var Error = require(__base + '/wrappers/error-msg'),
     Role = __sequelize.import(__base + "/models/role");
 
 //privates section
-var saveupdate = function (newrole) {
+var saveupdate = function (newrole, permissions) {
     return __sequelize.transaction(function (t) {
         return newrole.save()
             .then(function (role) {
+                if (permissions) {
+                    role.setPermissions(permissions);
+                    return role.save().then(function (full) {
+                        return role;
+                    });
+                }
                 return role;
             });
     }).then(function (role) {
@@ -39,21 +45,14 @@ module.exports = {
             });
     },
     create: function (body) {
-        var role = Role.build(body);
-        if (body.permissions) {
-            role.setPermissions(body.permissions);
-        }
-        return saveupdate(role);
+        return saveupdate(Role.build(body), body.permissions);
     },
     edit: function (id, body) {
         return this.findById(id).then(function (role) {
             if (Error.isError(role)) return role;
 
             role.description = body.description;
-            if (body.permissions) {
-                role.setPermissions(body.permissions);
-            }
-            return saveupdate(role);
+            return saveupdate(role, body.permissions);
         });
     }
 };

@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
 
     var User = sequelize.define('user', schema, {
         classMethods: {
-            hashPassword: function () {
+            hashPassword: function (password) {
                 return crypto.createHash(__hash_algorithm).update(password).digest('hex');
             }
         }
